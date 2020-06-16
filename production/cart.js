@@ -15,18 +15,18 @@ const displayCart = async () => {
     for (let i = 0; i < localStorage.length; i++) {
       // Pour chaque article du panier
       const product = await getCart(i); // Récupère les informations du produit
-      const teddyId = product[0]; // Stocke l'id du produit
-      const teddyName = product[1]; // Stocke le nom du produit
-      const teddyPrice = product[2] / 1000; // Stocke le prix du produit
-      const teddyImg = product[3]; // Stocke l'image du produit
-      cartInformation.products.push(teddyId); // Envoie l'id du produit au tableau products de cartInformation
+      const camId = product[0]; // Stocke l'id du produit
+      const camName = product[1]; // Stocke le nom du produit
+      const camPrice = product[2] / 1000; // Stocke le prix du produit
+      const camImg = product[3]; // Stocke l'image du produit
+      cartInformation.products.push(camId); // Envoie l'id du produit au tableau products de cartInformation
 
-      renderCart(teddyName, teddyPrice, teddyImg); // Fourni l'affichage du/des produits du panier
+      renderCart(camName, camPrice, camImg); // Fourni l'affichage du/des produits du panier
 
       const remove = document.querySelectorAll(".remove")[i];
       const article = document.querySelectorAll("article")[i];
 
-      deleteCart(remove, article, teddyName);
+      deleteCart(remove, article, camName);
     }
   } else {
     cart.textContent = "Votre panier est vide.";
