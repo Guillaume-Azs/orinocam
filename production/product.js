@@ -25,7 +25,7 @@ const renderCams = (productData) => {
         <img src="${productData.imageUrl}" alt="${productData.name}">
         <div class="product-information">
             <h2 class="product-title">${productData.name}</h2>
-            <p class="price">${productData.price / 1000}</p>       
+            <p class="price">${productData.price / 100}</p>       
             <p class="description">Toutes nos caméras sont de qualité, et vous garantissent une longévité extrême !</p>
         </div>
     </div>`;

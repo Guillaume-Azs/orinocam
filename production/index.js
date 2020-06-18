@@ -21,7 +21,7 @@ function renderProduct(productName, productId, productImg, productPrice) {
   article.innerHTML = `<img alt="${productName}" src="${productImg}">
     <button class="product-link" type="button"><a href="product.html?id=${productId}">Voir le produit</a></button>
     <p class="product-title">${productName}</p>
-    <p class="price">${productPrice / 1000}</p>
+    <p class="price">${productPrice / 100}</p>
     `;
   products.appendChild(article);
 }

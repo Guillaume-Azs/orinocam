@@ -17,7 +17,7 @@ const displayCart = async () => {
       const product = await getCart(i); // Récupère les informations du produit
       const camId = product[0]; // Stocke l'id du produit
       const camName = product[1]; // Stocke le nom du produit
-      const camPrice = product[2] / 1000; // Stocke le prix du produit
+      const camPrice = product[2] / 100; // Stocke le prix du produit
       const camImg = product[3]; // Stocke l'image du produit
       cartInformation.products.push(camId); // Envoie l'id du produit au tableau products de cartInformation
 
