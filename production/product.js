@@ -25,7 +25,7 @@ const renderCams = (productData) => {
         <img src="${productData.imageUrl}" alt="${productData.name}">
         <div class="product-information">
             <h2 class="product-title">${productData.name}</h2>
-            <p class="price">${productData.price / 100}</p>       
+            <p class="price">${productData.price / 100}</p>
             <p class="description">Toutes nos caméras sont de qualité, et vous garantissent une longévité extrême !</p>
         </div>
     </div>`;
@@ -56,7 +56,7 @@ const customizeYourCamera = (parentElt, productLenses) => {
     console.log(lenseChosen);
   });
 };
-// Ajoute le produit au panier
+// // Ajoute le produit au panier
 const addToCart = (parentElt, productData) => {
   // Crée le bouton d'envoie du produit
   const btn = document.createElement("button");
@@ -67,15 +67,29 @@ const addToCart = (parentElt, productData) => {
   parentElt.appendChild(btn);
 
   // Assigne valeur à envoyer à localStorage
-  const product = [
-    productData._id,
-    productData.name,
-    productData.price,
-    productData.imageUrl,
-  ];
+  const product = {
+    id: productData._id,
+    name: productData.name,
+    price: productData.price,
+    imageUrl: productData.imageUrl,
+    quantity: 1,
+  };
+
   // Envoie valeur à localStorage après un clique
   btn.addEventListener("click", () => {
-    localStorage.setItem(productData.name, JSON.stringify(product));
+    // récupérer panier localstorage
+    let panier = JSON.parse(localStorage.getItem("panier"));
+    if (panier === null) {
+      panier = {};
+    }
+    // ajouter le produit au panier
+    if (panier[product.id] !== undefined) {
+      panier[product.id].quantity += 1;
+    } else {
+      panier[product.id] = product;
+    }
+    // update panier localstorage
+    localStorage.setItem("panier", JSON.stringify(panier));
     btn.classList.add("invisible");
     div.textContent = "Le produit a été ajouté au panier !";
   });
