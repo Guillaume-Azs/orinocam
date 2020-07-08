@@ -29,8 +29,8 @@ const displayCart = async () => {
       const article = document.querySelectorAll("article")[i];
       const iconLeft = document.querySelectorAll(".fa-arrow-circle-left")[i];
       const iconRight = document.querySelectorAll(".fa-arrow-circle-right")[i];
-      iconLeft.style.fontSize = "20px";
-      iconRight.style.fontSize = "20px";
+      iconLeft.style.fontSize = "16px";
+      iconRight.style.fontSize = "16px";
       deleteCart(remove, article, itemId);
       decrementItem(iconLeft, article, itemId); // appel de la fonction décrémentation avec la flèche de gauche
       incrementItem(iconRight, article, itemId); // appel de la fonction incrémentation avec la flèche de droite
@@ -62,7 +62,6 @@ const renderCart = (productName, productPrice, imgUrl, productQuantity) => {
   cart.insertBefore(article, cartTotal); // Insère article avant cartTotal
   totalPrice += productPrice * productQuantity; /* Implémente prix */
   cartTotal.textContent = `Total : ${totalPrice}€`; /* Affiche le prix total */
-  console.log(article);
 };
 /* Supprime élément du panier sur un clique*/
 const deleteCart = (removeElt, container, productId) => {
@@ -83,7 +82,7 @@ const deleteCart = (removeElt, container, productId) => {
 // décrémente et enlève un produit au panier avec la flèche de gauche
 
 const decrementItem = (iconLeft, container, productId) => {
-  iconLeft.addEventListener("click", async () => {
+  iconLeft.addEventListener("click", () => {
     const panier = JSON.parse(localStorage.getItem("panier"));
     if (panier === null) return;
     if (panier[productId] === undefined) return;
@@ -102,7 +101,7 @@ const decrementItem = (iconLeft, container, productId) => {
 // incremente et rajoute un produit au panier avec la flèche de droite
 
 const incrementItem = (iconRight, container, productId) => {
-  iconRight.addEventListener("click", async () => {
+  iconRight.addEventListener("click", () => {
     const panier = JSON.parse(localStorage.getItem("panier"));
     if (panier === null) return;
     if (panier[productId] === undefined) return;
@@ -194,7 +193,7 @@ const formValidate = () => {
         return false;
       }
     } else {
-      lastNameErrorMessage.textContent = "Merci de renseigner votre nom !";
+      lastNameErrorMessage.textContent = " Merci de renseigner votre nom !";
       lastName.focus();
       return false;
     }
@@ -226,5 +225,12 @@ btn.addEventListener("click", async (e) => {
       cartInformation
     ); // Envoie données au serveur
     window.location = `./confirmation.html?id=${response.orderId}&price=${totalPrice}&user=${firstName.value}`; // Redirige vers la page de confirmation de commande
+    localStorage.removeItem("panier");
   }
 });
+
+if (!localStorage.getItem("panier")) {
+  // vérifie que la localstorage est vide, si il est vide on cache le formulaire et on insère le texte
+  cart.textContent = "Votre panier est vide.";
+  form.classList.add("invisible");
+}

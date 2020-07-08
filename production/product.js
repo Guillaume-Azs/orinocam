@@ -41,8 +41,7 @@ const customizeYourCamera = (parentElt, productLenses) => {
   label.textContent = "Lentilles disponibles : ";
   select.id = "lenses-list";
 
-  parentElt.appendChild(label);
-  parentElt.appendChild(select);
+  parentElt.appendChild(label).appendChild(select);
   // Crée une balise option pour chaque lentille
   productLenses.forEach((productLense) => {
     const option = document.createElement("option");
@@ -53,7 +52,6 @@ const customizeYourCamera = (parentElt, productLenses) => {
   // Récupère la lentille choisie dans la console
   select.addEventListener("change", (e) => {
     lenseChosen = e.target.value.toLowerCase();
-    console.log(lenseChosen);
   });
 };
 // // Ajoute le produit au panier
@@ -63,8 +61,7 @@ const addToCart = (parentElt, productData) => {
   const div = document.createElement("div");
   btn.textContent = "Ajouter au panier";
   div.classList.add("add-to-cart");
-  parentElt.appendChild(div);
-  parentElt.appendChild(btn);
+  parentElt.appendChild(div).appendChild(btn);
 
   // Assigne valeur à envoyer à localStorage
   const product = {
